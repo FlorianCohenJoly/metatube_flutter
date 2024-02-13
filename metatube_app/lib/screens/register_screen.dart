@@ -82,6 +82,9 @@ class RegisterPage extends StatelessWidget {
               onPressed: () => _register(context),
               child: const Text('Register'),
             ),
+            ElevatedButton(
+                onPressed: () => GoRouter.of(context).go('/login'),
+                child: const Text('Déja inscrit? Connectez-vous')),
           ],
         ),
       ),

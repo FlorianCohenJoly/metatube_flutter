@@ -18,6 +18,12 @@ GoRouter appRouter() => GoRouter(
                 return LoginPage();
               },
             ),
+            GoRoute(
+              path: 'navbar',
+              builder: (BuildContext context, GoRouterState state) {
+                return BottomNavigation();
+              },
+            ),
           ],
         ),
       ],

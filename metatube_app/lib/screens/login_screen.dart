@@ -33,7 +33,7 @@ class LoginPage extends StatelessWidget {
     );
 
     if (response.statusCode == 201) {
-      GoRouter.of(context).go('/home');
+      GoRouter.of(context).go('/navbar');
     } else {
       final Map<String, dynamic> error = jsonDecode(response.body);
       final String errorMessage = error['message'];
