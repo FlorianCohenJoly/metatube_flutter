@@ -20,6 +20,7 @@ class RequestResource {
 
 class RequestHelper {
   static const String POSTS = "posts";
+  
 
   static Future<http.Response> fetchPosts() async {
     final url = '${RequestResource.baseUrl}$POSTS'; // Corrected here

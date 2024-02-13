@@ -1,33 +1,39 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:http/http.dart' as http;
+import 'package:metatube_app/services/api_service.dart';
 
 class LoginPage extends StatelessWidget {
-  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  LoginPage({super.key});
+  LoginPage({Key? key}) : super(key: key);
 
   Future<void> _login(BuildContext context) async {
-    final String username = _usernameController.text.trim();
+    final String email = _emailController.text.trim();
     final String password = _passwordController.text.trim();
 
+    if (email.isEmpty || password.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Veuillez remplir tous les champs')),
+      );
+      return;
+    }
+
     final response = await http.post(
-      Uri.parse('https://votre-api.com/login'),
+      Uri.parse('${RequestResource.baseUrl}${RequestResource.LOGIN}'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
       body: jsonEncode(<String, String>{
-        'username': username,
+        'email': email,
         'password': password,
       }),
     );
 
-    if (response.statusCode == 200) {
-      final Map<String, dynamic> data = jsonDecode(response.body);
-      final String token = data['token'];
-      print('Logged in with token: $token');
+    if (response.statusCode == 201) {
+      GoRouter.of(context).go('/home');
     } else {
       final Map<String, dynamic> error = jsonDecode(response.body);
       final String errorMessage = error['message'];
@@ -41,27 +47,27 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Login'),
+        title: const Text('Login'),
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             TextField(
-              controller: _usernameController,
-              decoration: InputDecoration(labelText: 'Username'),
+              controller: _emailController,
+              decoration: const InputDecoration(labelText: 'Email'),
             ),
-            SizedBox(height: 12.0),
+            const SizedBox(height: 12.0),
             TextField(
               controller: _passwordController,
-              decoration: InputDecoration(labelText: 'Password'),
+              decoration: const InputDecoration(labelText: 'Password'),
               obscureText: true,
             ),
-            SizedBox(height: 20.0),
+            const SizedBox(height: 20.0),
             ElevatedButton(
               onPressed: () => _login(context),
-              child: Text('Login'),
+              child: const Text('Login'),
             ),
           ],
         ),

@@ -13,9 +13,9 @@ GoRouter appRouter() => GoRouter(
           },
           routes: <RouteBase>[
             GoRoute(
-              path: 'details',
+              path: 'login',
               builder: (BuildContext context, GoRouterState state) {
-                return const BottomNavigation();
+                return LoginPage();
               },
             ),
           ],
