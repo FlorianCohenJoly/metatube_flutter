@@ -16,22 +16,20 @@ class RequestResource {
 
   static const String REGISTER = "auth/register";
   static const String LOGIN = "auth/login";
+  static const String VIDEO = "video";
+  static const String USER = "user";
 }
 
 class RequestHelper {
   static const String POSTS = "posts";
-  
 
   static Future<http.Response> fetchPosts() async {
-    final url = '${RequestResource.baseUrl}$POSTS'; // Corrected here
+    final url = '${RequestResource.baseUrl}$POSTS';
     try {
       return await http.get(Uri.parse(url));
     } catch (e) {
-      // Handle error
       print('Error fetching posts: $e');
       throw e;
     }
   }
-
-  // You can add similar methods for other necessary endpoints
 }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:metatube_app/components/List_view_video.dart';
+import 'package:metatube_app/screens/profile_screen.dart';
 
 class BottomNavigation extends StatefulWidget {
   const BottomNavigation({Key? key}) : super(key: key);
@@ -17,10 +19,10 @@ class _BottomNavigationState extends State<BottomNavigation> {
     // CreateNav(),
     // SubscriptionsNav(),
     // ProfilNav(),
-    Text('Home Page'),
+    VideoList(),
     Text("Mes j'aimes Page"),
     Text('Recherche Page'),
-    Text('Réglages Page'),
+    ProfilePage()
   ];
 
   @override

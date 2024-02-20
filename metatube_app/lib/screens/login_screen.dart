@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:http/http.dart' as http;
 import 'package:metatube_app/services/api_service.dart';
+import 'package:metatube_app/services/sharedPreferences.dart';
 
 class LoginPage extends StatelessWidget {
   final TextEditingController _emailController = TextEditingController();
@@ -33,6 +34,11 @@ class LoginPage extends StatelessWidget {
     );
 
     if (response.statusCode == 201) {
+      void signupSuccess(String token) async {
+        // Stocker le token
+        await AuthHelper.storeToken(token);
+      }
+
       GoRouter.of(context).go('/navbar');
     } else {
       final Map<String, dynamic> error = jsonDecode(response.body);
