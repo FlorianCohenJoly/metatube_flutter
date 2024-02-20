@@ -9,7 +9,7 @@ class RegisterPage extends StatelessWidget {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  RegisterPage({super.key});
+  RegisterPage({Key? key}) : super(key: key);
 
   Future<void> _register(BuildContext context) async {
     final String username = _usernameController.text.trim();
@@ -62,19 +62,28 @@ class RegisterPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            TextField(
+            TextFormField(
               controller: _usernameController,
-              decoration: const InputDecoration(labelText: 'Username'),
+              decoration: InputDecoration(
+                labelText: 'Username',
+                border: OutlineInputBorder(),
+              ),
             ),
             const SizedBox(height: 12.0),
-            TextField(
+            TextFormField(
               controller: _emailController,
-              decoration: const InputDecoration(labelText: 'Email'),
+              decoration: InputDecoration(
+                labelText: 'Email',
+                border: OutlineInputBorder(),
+              ),
             ),
             const SizedBox(height: 12.0),
-            TextField(
+            TextFormField(
               controller: _passwordController,
-              decoration: const InputDecoration(labelText: 'Password'),
+              decoration: InputDecoration(
+                labelText: 'Password',
+                border: OutlineInputBorder(),
+              ),
               obscureText: true,
             ),
             const SizedBox(height: 20.0),
@@ -82,9 +91,10 @@ class RegisterPage extends StatelessWidget {
               onPressed: () => _register(context),
               child: const Text('Register'),
             ),
-            ElevatedButton(
-                onPressed: () => GoRouter.of(context).go('/login'),
-                child: const Text('Déja inscrit? Connectez-vous')),
+            TextButton(
+              onPressed: () => GoRouter.of(context).go('/login'),
+              child: const Text('Déjà inscrit? Connectez-vous'),
+            ),
           ],
         ),
       ),

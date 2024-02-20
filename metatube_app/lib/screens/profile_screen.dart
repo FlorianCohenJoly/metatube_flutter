@@ -37,7 +37,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   Future<void> fetchUserData(String token) async {
     final response = await http.get(
-      Uri.parse('${RequestResource.baseUrl}${RequestResource.USER}'),
+      Uri.parse('${RequestResource.baseUrl}${RequestResource.LOGIN}'),
       headers: {
         'Authorization': 'Bearer $token',
       },
@@ -65,6 +65,11 @@ class _ProfilePageState extends State<ProfilePage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Text(
+                    'Username: ${username ?? 'Loading...'}',
+                    style: const TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
                   const SizedBox(height: 10),
                   Text(
                     'Email: ${email ?? 'Loading...'}',
@@ -82,5 +87,3 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 }
-
-class AuthService {}

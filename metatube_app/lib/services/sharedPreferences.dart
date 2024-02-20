@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:metatube_app/services/api_service.dart';
 
 class AuthHelper {
-  static final storage = const FlutterSecureStorage();
+  static const storage = FlutterSecureStorage();
 
   static Future<void> storeToken(String token) async {
     await storage.write(key: 'token', value: token);
@@ -27,7 +27,7 @@ class RequestHelper {
   static Future<http.Response> fetchUserData() async {
     final token = await AuthHelper.getToken();
     final response = await http.get(
-      Uri.parse('${RequestResource.baseUrl}${RequestResource.USER}'),
+      Uri.parse('${RequestResource.baseUrl}${RequestResource.LOGIN}'),
       headers: {
         'Authorization': 'Bearer $token',
       },

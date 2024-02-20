@@ -33,13 +33,18 @@ class LoginPage extends StatelessWidget {
       }),
     );
 
-    if (response.statusCode == 201) {
-      void signupSuccess(String token) async {
-        // Stocker le token
-        await AuthHelper.storeToken(token);
-      }
+    if (response.statusCode == 200) {
+      final Map<String, dynamic> responseData = jsonDecode(response.body);
+      final String? token = responseData['token'];
 
-      GoRouter.of(context).go('/navbar');
+      if (token != null) {
+        await AuthHelper.storeToken(token);
+        GoRouter.of(context).go('/navbar');
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('La réponse ne contient pas de token')),
+        );
+      }
     } else {
       final Map<String, dynamic> error = jsonDecode(response.body);
       final String errorMessage = error['message'];
@@ -60,14 +65,20 @@ class LoginPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            TextField(
+            TextFormField(
               controller: _emailController,
-              decoration: const InputDecoration(labelText: 'Email'),
+              decoration: InputDecoration(
+                labelText: 'Email',
+                border: OutlineInputBorder(),
+              ),
             ),
             const SizedBox(height: 12.0),
-            TextField(
+            TextFormField(
               controller: _passwordController,
-              decoration: const InputDecoration(labelText: 'Password'),
+              decoration: InputDecoration(
+                labelText: 'Password',
+                border: OutlineInputBorder(),
+              ),
               obscureText: true,
             ),
             const SizedBox(height: 20.0),

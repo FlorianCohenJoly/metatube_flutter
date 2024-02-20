@@ -14,36 +14,35 @@ class _BottomNavigationState extends State<BottomNavigation> {
   int _selectedIndex = 0;
 
   static const List<Widget> _widgetOptions = <Widget>[
-    // HomeNav(),
-    // ShortsNav(),
-    // CreateNav(),
-    // SubscriptionsNav(),
-    // ProfilNav(),
     VideoList(),
-    Text("Mes j'aimes Page"),
-    Text('Recherche Page'),
+    Text("Favorites"),
+    Text('Search'),
     ProfilePage()
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
-      ),
+      body: _widgetOptions.elementAt(_selectedIndex),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
-          color: Colors.green.shade400,
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              blurRadius: 20,
+              color: Colors.black.withOpacity(0.1),
+            ),
+          ],
         ),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 17),
+          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8),
           child: GNav(
             gap: 8,
-            backgroundColor: Colors.green.shade400,
-            color: Colors.black,
             activeColor: Colors.black,
-            tabBackgroundColor: Colors.grey.shade300,
+            iconSize: 24,
             padding: EdgeInsets.all(16),
+            duration: Duration(milliseconds: 300),
+            tabBackgroundColor: Colors.green[400]!,
             tabs: [
               GButton(
                 icon: Icons.home,
@@ -51,15 +50,15 @@ class _BottomNavigationState extends State<BottomNavigation> {
               ),
               GButton(
                 icon: Icons.favorite_border,
-                text: "Mes j'aimes",
+                text: "Favorites",
               ),
               GButton(
                 icon: Icons.search,
-                text: 'Recherche',
+                text: 'Search',
               ),
               GButton(
-                icon: Icons.settings,
-                text: 'Réglages',
+                icon: Icons.person,
+                text: 'Profile',
               ),
             ],
             selectedIndex: _selectedIndex,
