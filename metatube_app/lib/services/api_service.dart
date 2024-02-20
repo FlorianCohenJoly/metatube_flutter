@@ -18,6 +18,7 @@ class RequestResource {
   static const String LOGIN = "auth/login";
   static const String VIDEO = "video";
   static const String USER = "user";
+  static const String LIKE = "like";
 }
 
 class RequestHelper {

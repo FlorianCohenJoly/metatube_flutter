@@ -33,13 +33,17 @@ class LoginPage extends StatelessWidget {
       }),
     );
 
-    if (response.statusCode == 200) {
+    if (response.statusCode == 201) {
       final Map<String, dynamic> responseData = jsonDecode(response.body);
-      final String? token = responseData['token'];
+      final String? accessToken = responseData['access_token'];
 
-      if (token != null) {
-        await AuthHelper.storeToken(token);
+      if (accessToken != null) {
+        // Stocker le token dans le stockage sécurisé
+        await AuthHelper.storeToken(accessToken);
+
+        // Rediriger l'utilisateur vers la page de navigation après la connexion réussie
         GoRouter.of(context).go('/navbar');
+        print('Token: $accessToken');
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('La réponse ne contient pas de token')),

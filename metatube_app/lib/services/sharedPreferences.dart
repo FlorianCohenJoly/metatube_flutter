@@ -27,7 +27,7 @@ class RequestHelper {
   static Future<http.Response> fetchUserData() async {
     final token = await AuthHelper.getToken();
     final response = await http.get(
-      Uri.parse('${RequestResource.baseUrl}${RequestResource.LOGIN}'),
+      Uri.parse('${RequestResource.baseUrl}${RequestResource.USER}'),
       headers: {
         'Authorization': 'Bearer $token',
       },
