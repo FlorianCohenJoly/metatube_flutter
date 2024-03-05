@@ -64,7 +64,7 @@ class RegisterPage extends StatelessWidget {
           children: [
             TextFormField(
               controller: _usernameController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Username',
                 border: OutlineInputBorder(),
               ),
@@ -72,7 +72,7 @@ class RegisterPage extends StatelessWidget {
             const SizedBox(height: 12.0),
             TextFormField(
               controller: _emailController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Email',
                 border: OutlineInputBorder(),
               ),
@@ -80,7 +80,7 @@ class RegisterPage extends StatelessWidget {
             const SizedBox(height: 12.0),
             TextFormField(
               controller: _passwordController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Password',
                 border: OutlineInputBorder(),
               ),

@@ -21,7 +21,7 @@ GoRouter appRouter() => GoRouter(
             GoRoute(
               path: 'navbar',
               builder: (BuildContext context, GoRouterState state) {
-                return BottomNavigation();
+                return const BottomNavigation();
               },
             ),
           ],

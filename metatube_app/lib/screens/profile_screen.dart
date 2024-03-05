@@ -45,6 +45,7 @@ class _ProfilePageState extends State<ProfilePage> {
         isLoading = false;
       });
     }
+    print(likedVideos);
   }
 
   Future<void> fetchUserData(String token) async {
@@ -77,7 +78,6 @@ class _ProfilePageState extends State<ProfilePage> {
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
       final file = File(pickedFile.path);
-      // Mettez à jour l'avatar dans la base de données en utilisant la méthode PATCH
       await _updateAvatar(file);
     }
   }
@@ -96,16 +96,12 @@ class _ProfilePageState extends State<ProfilePage> {
 
       final response = await http.Response.fromStream(await request.send());
       if (response.statusCode == 200) {
-        // Avatar updated successfully
         print('Avatar updated successfully');
-        // Rechargez les données de l'utilisateur pour afficher le nouvel avatar
         await loadUserData();
       } else {
-        // Handle error
         throw Exception('Failed to update avatar: ${response.statusCode}');
       }
     } else {
-      // Handle error when token is null
       throw Exception('Token is null');
     }
   }

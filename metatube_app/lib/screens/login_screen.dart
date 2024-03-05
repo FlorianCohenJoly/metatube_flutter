@@ -38,10 +38,8 @@ class LoginPage extends StatelessWidget {
       final String? accessToken = responseData['access_token'];
 
       if (accessToken != null) {
-        // Stocker le token dans le stockage sécurisé
         await AuthHelper.storeToken(accessToken);
 
-        // Rediriger l'utilisateur vers la page de navigation après la connexion réussie
         GoRouter.of(context).go('/navbar');
         print('Token: $accessToken');
       } else {
@@ -71,7 +69,7 @@ class LoginPage extends StatelessWidget {
           children: [
             TextFormField(
               controller: _emailController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Email',
                 border: OutlineInputBorder(),
               ),
@@ -79,7 +77,7 @@ class LoginPage extends StatelessWidget {
             const SizedBox(height: 12.0),
             TextFormField(
               controller: _passwordController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Password',
                 border: OutlineInputBorder(),
               ),

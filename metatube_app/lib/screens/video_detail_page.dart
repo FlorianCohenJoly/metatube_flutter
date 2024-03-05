@@ -22,23 +22,20 @@ class VideoDetailsPage extends StatelessWidget {
         'Authorization': 'Bearer $token',
       };
       final body = jsonEncode({
-        'entityType': 'video',
+        'entityType': 'Video',
         'entityId': videoId,
       });
 
       final response =
-          await http.post(Uri.parse(url), headers: headers, body: body);
+          await http.put(Uri.parse(url), headers: headers, body: body);
 
       if (response.statusCode == 200) {
-        // Video liked successfully
         print('Video $videoId liked successfully');
       } else {
-        // Handle error
         throw Exception(
             'Failed to like video $videoId: ${response.statusCode}');
       }
     } else {
-      // Handle error when token is null
       throw Exception('Token is null');
     }
   }
